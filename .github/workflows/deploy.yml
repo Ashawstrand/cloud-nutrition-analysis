@@ -38,7 +38,7 @@ jobs:
     # azurite container on localhost:10000
     - name: Start Azurite
       run: |
-        docker run -d -p 10000:10000 mcr.microsoft.com/azure-storage/azurite
+        docker run -d -p 10000:10000 mcr.microsoft.com/azure-storage/azurite --skipApiVersionCheck
         
     #Execute Task 3 Lambda simulation
     - name: Run Task 3 serverless simulation
