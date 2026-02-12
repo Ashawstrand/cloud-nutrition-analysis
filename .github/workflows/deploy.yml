@@ -36,13 +36,13 @@ jobs:
 
     #Execute Task 3 Lambda simulation
     - name: Run Task 3 serverless simulation
-      run: python task3/lambda_function.py
+      run: python Task3/lambda_function.py
 
     #Checks that results.json produced output from lambda function
     # if file doesn't exist or empty, print error message
     - name: Verify results.json created
       run: |
-        if [ ! -s task3/simulated_nosql/results.json ]; then
+        if [ ! -s Task3/simulated_nosql/results.json ]; then
           echo "results.json missing or empty"
           exit 1
         fi
