@@ -1,0 +1,2 @@
+**Diet Analysis Project - (Tasks 1–4):**
+This repository contains the full implementation of Tasks 1–4 for the Diet Analysis assignment. It includes a Python‑based nutritional analysis script, a Dockerized application environment, and a GitHub Actions CI/CD pipeline that automatically builds and runs the container on every push to the main branch. The project demonstrates end‑to‑end workflow integration: data processing, containerization, and automated simulated deployment, with the container’s console output serving as evidence of successful execution.
