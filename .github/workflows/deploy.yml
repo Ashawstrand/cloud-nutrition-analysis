@@ -30,10 +30,6 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    #Execute Task 1 Python script
-    - name: Run Task 1 analysis script
-      run: python data_analysis.py
-
     #Build Docker image from Task 2 Dockerfile
     - name: Build Docker image
       run: docker build -t nutrition-app .
