@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nutritional Insights</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <!-- chart matrix for heatmap -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1/dist/chartjs-chart-matrix.min.js"></script>
+  <!--CSV parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <h1>Nutritional Insights</h1>
+  </header>
+
+  <main class="main-content">
+
+    <div id="loadingOverlay" class="loading-overlay">
+      <div class="spinner"></div>
+      <p>Loading nutritional data…</p>
+    </div>
+
+    <section class="section">
+      <h2>Explore Nutritional Insights</h2>
+      <div class="charts-grid">
+
+        <div class="chart-card">
+          <h3>Bar Chart</h3>
+          <p class="chart-desc">Average macronutrient content by diet type.</p>
+          <div class="chart-container">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Scatter Plot</h3>
+          <p class="chart-desc">Nutrient relationships (e.g., protein vs carbs).</p>
+          <div class="chart-container">
+            <canvas id="scatterChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Heatmap</h3>
+          <p class="chart-desc">Nutrient correlations.</p>
+          <div class="chart-container">
+            <canvas id="heatmapChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Pie Chart</h3>
+          <p class="chart-desc">Recipe distribution by diet type.</p>
+          <div class="chart-container">
+            <canvas id="pieChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Filters and Data Interaction</h2>
+      <div class="filters-row">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search by Diet Type"
+          aria-label="Search by diet type"
+        />
+        <select id="dietFilter" class="diet-select" aria-label="Filter by diet type">
+          <option value="all">All Diet Types</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>API Data Interaction</h2>
+      <div class="api-buttons">
+        <button class="btn btn-blue" id="btnInsights" onclick="getNutritionalInsights()">
+          Get Nutritional Insights
+        </button>
+        <button class="btn btn-green" id="btnRecipes" onclick="getRecipes()">
+          Get Recipes
+        </button>
+        <button class="btn btn-purple" id="btnClusters" onclick="getClusters()">
+          Get Clusters
+        </button>
+      </div>
+      <div id="apiResult" class="api-result" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="section">
+      <h2>Pagination</h2>
+      <div class="pagination" role="navigation" aria-label="Page navigation">
+        <button class="page-btn" id="prevBtn" onclick="changePage(-1)" disabled>Previous</button>
+        <button class="page-btn active" id="pageBtn1" onclick="goToPage(1)">1</button>
+        <button class="page-btn" id="pageBtn2" onclick="goToPage(2)">2</button>
+        <button class="page-btn" id="nextBtn" onclick="changePage(1)">Next</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Nutritional Insights. All Rights Reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
