@@ -6,6 +6,16 @@ __pycache__/
 # C extensions
 *.so
 
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+
 # Distribution / packaging
 .Python
 build/
