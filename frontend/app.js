@@ -371,6 +371,36 @@ function clearApiResult() {
   el.classList.remove('visible');
 }
 
+// OAuth login handlers
+document.getElementById('loginGoogle')?.addEventListener('click', () => {
+  showApiResult('<strong>Google OAuth:</strong> Redirecting to Google login (simulated).');
+});
+
+document.getElementById('loginGithub')?.addEventListener('click', () => {
+  showApiResult('<strong>GitHub OAuth:</strong> Redirecting to GitHub login (simulated).');
+});
+
+// 2FA verification handler
+document.getElementById('verify2faBtn')?.addEventListener('click', () => {
+  const code = document.getElementById('twofaInput').value.trim();
+
+  if (!code) {
+    showApiResult('Please enter a 2FA code before verifying.');
+    return;
+  }
+
+  showApiResult(`<strong>2FA Verified:</strong> Code <em>${code}</em> accepted (simulated).`);
+});
+
+// Cloud resource cleanup handler
+document.getElementById('cleanupBtn')?.addEventListener('click', () => {
+  showApiResult('<strong>Cleanup started:</strong> Releasing unused cloud resources (simulated)...');
+
+  setTimeout(() => {
+    showApiResult('<strong>Cleanup complete:</strong> All unused resources have been removed (simulated).');
+  }, 1500);
+});
+
 // Pagination - I dont know how this would work in the context of the project
 function changePage(delta) {
   goToPage(currentPage + delta);

@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nutritional Insights</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <!-- chart matrix for heatmap -->
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1/dist/chartjs-chart-matrix.min.js"></script>
-  <!--CSV parsing -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
@@ -25,77 +22,94 @@
       <p>Loading nutritional data…</p>
     </div>
 
+    <!-- 1. Charts -->
     <section class="section">
       <h2>Explore Nutritional Insights</h2>
       <div class="charts-grid">
-
         <div class="chart-card">
           <h3>Bar Chart</h3>
           <p class="chart-desc">Average macronutrient content by diet type.</p>
-          <div class="chart-container">
-            <canvas id="barChart"></canvas>
-          </div>
+          <div class="chart-container"><canvas id="barChart"></canvas></div>
         </div>
-
         <div class="chart-card">
           <h3>Scatter Plot</h3>
           <p class="chart-desc">Nutrient relationships (e.g., protein vs carbs).</p>
-          <div class="chart-container">
-            <canvas id="scatterChart"></canvas>
-          </div>
+          <div class="chart-container"><canvas id="scatterChart"></canvas></div>
         </div>
-
         <div class="chart-card">
           <h3>Heatmap</h3>
           <p class="chart-desc">Nutrient correlations.</p>
-          <div class="chart-container">
-            <canvas id="heatmapChart"></canvas>
-          </div>
+          <div class="chart-container"><canvas id="heatmapChart"></canvas></div>
         </div>
-
         <div class="chart-card">
           <h3>Pie Chart</h3>
           <p class="chart-desc">Recipe distribution by diet type.</p>
-          <div class="chart-container">
-            <canvas id="pieChart"></canvas>
-          </div>
+          <div class="chart-container"><canvas id="pieChart"></canvas></div>
         </div>
-
       </div>
     </section>
 
+    <!-- 2. Filters -->
     <section class="section">
       <h2>Filters and Data Interaction</h2>
       <div class="filters-row">
-        <input
-          type="text"
-          id="searchInput"
-          class="search-input"
-          placeholder="Search by Diet Type"
-          aria-label="Search by diet type"
-        />
+        <input type="text" id="searchInput" class="search-input"
+               placeholder="Search by Diet Type" aria-label="Search by diet type" />
         <select id="dietFilter" class="diet-select" aria-label="Filter by diet type">
           <option value="all">All Diet Types</option>
         </select>
       </div>
     </section>
 
+    <!-- 3. API Data Interaction -->
     <section class="section">
       <h2>API Data Interaction</h2>
       <div class="api-buttons">
-        <button class="btn btn-blue" id="btnInsights" onclick="getNutritionalInsights()">
-          Get Nutritional Insights
-        </button>
-        <button class="btn btn-green" id="btnRecipes" onclick="getRecipes()">
-          Get Recipes
-        </button>
-        <button class="btn btn-purple" id="btnClusters" onclick="getClusters()">
-          Get Clusters
-        </button>
+        <button class="btn btn-blue"   onclick="getNutritionalInsights()">Get Nutritional Insights</button>
+        <button class="btn btn-green"  onclick="getRecipes()">Get Recipes</button>
+        <button class="btn btn-purple" onclick="getClusters()">Get Clusters</button>
       </div>
       <div id="apiResult" class="api-result" role="status" aria-live="polite"></div>
     </section>
 
+    <!-- 4. Security & Compliance -->
+    <section class="section">
+      <h2>Security &amp; Compliance</h2>
+      <div class="security-panel">
+        <p class="security-status-title"><strong>Security Status</strong></p>
+        <div class="security-item"><strong>Encryption:</strong> <span class="security-ok">Enabled</span></div>
+        <div class="security-item"><strong>Access Control:</strong> <span class="security-ok">Secure</span></div>
+        <div class="security-item"><strong>Compliance:</strong> <span class="security-ok">GDPR Compliant</span></div>
+      </div>
+    </section>
+
+    <!-- 5. OAuth & 2FA -->
+    <section class="section">
+      <h2>OAuth &amp; 2FA Integration</h2>
+      <div class="login-panel">
+        <p class="login-title">Secure Login</p>
+        <div class="oauth-buttons">
+          <button class="btn btn-blue"  id="loginGoogle">Login with Google</button>
+          <button class="btn btn-blue"  id="loginGithub">Login with GitHub</button>
+        </div>
+        <label for="twofaInput" class="twofa-label">Enter 2FA Code</label>
+        <input type="text" id="twofaInput" class="twofa-input" placeholder="Enter your 2FA code" />
+        <div>
+          <button class="btn btn-green" id="verify2faBtn">Verify 2FA</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Cloud Resource Cleanup -->
+    <section class="section">
+      <h2>Cloud Resource Cleanup</h2>
+      <div class="cleanup-panel">
+        <p class="cleanup-desc">Ensure that cloud resources are efficiently managed and cleaned up post deployment.</p>
+        <button class="btn btn-red-outline" id="cleanupBtn">Clean Up Resources</button>
+      </div>
+    </section>
+
+    <!-- 7. Pagination -->
     <section class="section">
       <h2>Pagination</h2>
       <div class="pagination" role="navigation" aria-label="Page navigation">
