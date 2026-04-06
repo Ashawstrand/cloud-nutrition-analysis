@@ -372,12 +372,17 @@ function clearApiResult() {
 }
 
 // OAuth login handlers
+function startAzureLogin(provider) {
+  showApiResult(`<strong>${provider} OAuth:</strong> Redirecting to ${provider} login...`);
+  window.location.href = `/.auth/login/${provider.toLowerCase()}?post_login_redirect_url=/`;
+}
+
 document.getElementById('loginGoogle')?.addEventListener('click', () => {
-  showApiResult('<strong>Google OAuth:</strong> Redirecting to Google login (simulated).');
+  startAzureLogin('Google');
 });
 
 document.getElementById('loginGithub')?.addEventListener('click', () => {
-  showApiResult('<strong>GitHub OAuth:</strong> Redirecting to GitHub login (simulated).');
+  startAzureLogin('GitHub');
 });
 
 // 2FA verification handler
