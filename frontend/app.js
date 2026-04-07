@@ -414,7 +414,7 @@ document.getElementById('verify2faBtn')?.addEventListener('click', () => {
     return;
   }
 
-  showApiResult(`<strong>2FA Verified:</strong> Code <em>${code}</em> accepted (simulated).`);
+  showApiResult(`<strong>Use Google and Github's own Login 2FA Login.`);
 });
 
 // Cloud resource cleanup handler
