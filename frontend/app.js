@@ -419,6 +419,17 @@ document.getElementById('verify2faBtn')?.addEventListener('click', () => {
 
 // Cloud resource cleanup handler
 document.getElementById('cleanupBtn')?.addEventListener('click', async () => {
+  const confirmed = window.confirm(
+    'Are you sure you want to delete the Azure Blob Storage container?\n\n' +
+    'This action cannot be undone.\n' +
+    'The app will fall back to the local CSV file if blob storage is deleted.'
+  );
+  
+  if (!confirmed) {
+    showApiResult('<strong>Cleanup cancelled:</strong> No resources were deleted.');
+    return;
+  }
+  
   showApiResult('<strong>Cleanup started:</strong> Deleting Azure Blob Storage container...');
   try {
     const response = await fetch('/cleanup-resources', { method: 'POST' });
