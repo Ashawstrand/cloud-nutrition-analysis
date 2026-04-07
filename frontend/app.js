@@ -23,8 +23,29 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('dietFilter').addEventListener('change', applyFilters);
 });
 
-// CSV Data loading
+// CSV Data loading with fallback
 function loadData() {
+  // Try blob storage first
+  Papa.parse('/api/nutrition-data', {
+    download: true,
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    complete(results) {
+      allData      = results.data.filter(r => r.Diet_type && r.Recipe_name);
+      filteredData = [...allData];
+      bootstrap();
+    },
+    error(err) {
+      console.warn('Blob storage failed, falling back to local CSV:', err);
+      // Fallback to local CSV
+      loadLocalData();
+    },
+  });
+}
+
+// Fallback function for local CSV
+function loadLocalData() {
   Papa.parse('../All_Diets.csv', {
     download: true,
     header: true,
@@ -37,11 +58,10 @@ function loadData() {
     },
     error(err) {
       hideLoading();
-      console.error('Failed to load All_Diets.csv:', err);
+      console.error('Failed to load local CSV:', err);
       showApiResult(
-        '<strong>Could not load All_Diets.csv.</strong> ' +
-        'Please serve the project from a local HTTP server (e.g. VS Code Live Server) ' +
-        'so the browser can fetch the CSV from the parent directory.'
+        '<strong>Could not load data.</strong> ' +
+        'Both Azure Blob Storage and local CSV failed to load.'
       );
     },
   });
@@ -398,12 +418,20 @@ document.getElementById('verify2faBtn')?.addEventListener('click', () => {
 });
 
 // Cloud resource cleanup handler
-document.getElementById('cleanupBtn')?.addEventListener('click', () => {
-  showApiResult('<strong>Cleanup started:</strong> Releasing unused cloud resources (simulated)...');
-
-  setTimeout(() => {
-    showApiResult('<strong>Cleanup complete:</strong> All unused resources have been removed (simulated).');
-  }, 1500);
+document.getElementById('cleanupBtn')?.addEventListener('click', async () => {
+  showApiResult('<strong>Cleanup started:</strong> Deleting Azure Blob Storage container...');
+  try {
+    const response = await fetch('/cleanup-resources', { method: 'POST' });
+    const result = await response.json();
+    
+    if (response.ok && result.status === 'success') {
+      showApiResult(`<strong>Cleanup complete:</strong> ${result.message}`);
+    } else {
+      showApiResult(`<strong>Cleanup result:</strong> ${result.message}`);
+    }
+  } catch (err) {
+    showApiResult(`<strong>Cleanup failed:</strong> ${err.message}`);
+  }
 });
 
 // Pagination - I dont know how this would work in the context of the project
